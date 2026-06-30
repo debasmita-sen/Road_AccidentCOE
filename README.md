@@ -1,315 +1,306 @@
-Road Accident Analysis Dashboard
 
-Excel, SQL and Power BI Milestone Project
+````markdown
+<div align="center">
 
-Project Overview
+# 🚦 Road Accident Analysis Dashboard  
+### Excel • SQL • Power BI | Accident Severity & Road Safety Insights
 
-This project analyzes road accident data to identify patterns in accident severity, casualty count, road conditions, weather conditions, vehicle types, and location-based accident risk. The main objective is to build an interactive analytics dashboard that helps decision-makers understand where and under what conditions accidents are more likely to become serious or fatal.
+<img src="https://img.shields.io/badge/Project-Road%20Accident%20Analysis-blue?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Tool-Excel-green?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Tool-MySQL-orange?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Tool-Power%20BI-yellow?style=for-the-badge" />
 
-The project follows an end-to-end analytics workflow using Microsoft Excel, MySQL, and Power BI. Excel was used for cleaning, preparation, and initial analysis. MySQL was used to store the cleaned data in structured relational tables and perform SQL-based analysis. Power BI was used to create an interactive dashboard with KPIs, slicers, charts, and business insights.
+</div>
 
 ---
 
-Business Problem Statement
+## 📌 Project Overview
 
-Road safety authorities and transport decision-makers need clear visibility into accident patterns across severity levels, road types, weather conditions, vehicle types, and local authority districts. Without proper analysis, it becomes difficult to identify high-risk accident conditions and take targeted safety actions.
+The **Road Accident Analysis Dashboard** is a data analytics project created using **Excel, SQL, and Power BI**. The project focuses on analyzing accident patterns, casualty risk, road conditions, vehicle involvement, and accident severity.
 
-This project aims to answer questions such as:
+The main objective of this project is to transform raw road accident data into meaningful business insights that can support **road safety planning, accident prevention, and decision-making**.
+
+This project includes:
+
+- 📊 Excel-based data cleaning, PivotTables, charts, and simple statistics  
+- 🗄️ SQL database design, table creation, data import, and analytical queries  
+- 📈 Power BI dashboard with KPIs, slicers, and interactive visuals  
+- 📝 Business insights and recommendations based on accident trends  
+
+---
+
+## 🎯 Business Problem
+
+Road safety authorities and decision-makers need a clear understanding of accident patterns to reduce accident severity and casualty risk. However, raw accident data is difficult to interpret without proper cleaning, analysis, and visualization.
+
+This project aims to answer important business questions such as:
 
 - Which accident severity level occurs most frequently?
-- Which road types and vehicle types are linked with higher casualties?
-- Do weather and road surface conditions affect accident severity?
-- Which districts report higher accident counts?
-- Are serious or fatal accidents more common under certain speed limits or lighting conditions?
-- What actions can road safety authorities take to reduce accident risk?
+- Which road type records the highest number of accidents?
+- Which vehicle types are linked with higher casualty counts?
+- Do weather and light conditions affect accident patterns?
+- Are accidents more common in urban or rural areas?
+- Which months or years show higher accident frequency?
+- Which locations or districts show higher accident and casualty risk?
+
+By answering these questions, the analysis helps identify **high-risk accident conditions** and supports better road safety actions.
 
 ---
 
-Dataset Information
+## 📂 Dataset Information
 
-The dataset used in this project is a cleaned road accident dataset.
+The dataset contains detailed road accident records with accident-level, location-based, road condition, weather, vehicle, and time-related information.
 
-Dataset Summary
+### Key Dataset Columns
 
-Item| Description
-Dataset Name| Road Accident Data
-File Format| CSV / Excel
-Total Cleaned Records| Approximately 302,536 records
-Total Columns| 27 columns
-Main Identifier| accident_index
-Time Period| 2021–2022
-Main Focus Area| Accident Severity and Road Safety Risk Analysis
-
-Key Columns Used
-
-Column Name| Description
-accident_index| Unique accident record ID
-accident_date| Date of accident
-day_of_week| Day on which accident occurred
-accident_severity| Severity of accident: Slight, Serious, Fatal
-number_of_casualties| Number of casualties in the accident
-number_of_vehicles| Number of vehicles involved
-speed_limit| Speed limit of the road
-road_type| Type of road where accident occurred
-road_surface_conditions| Road surface condition
-weather_conditions| Weather condition during accident
-light_conditions| Lighting condition during accident
-vehicle_type| Type of vehicle involved
-local_authority_district| District/local authority area
-urban_or_rural_area| Whether the accident occurred in an urban or rural area
+| Category | Important Columns |
+|---|---|
+| Accident Details | `accident_index`, `accident_date`, `accident_time`, `accident_severity` |
+| Casualty & Vehicle Details | `number_of_casualties`, `number_of_vehicles`, `vehicle_type` |
+| Road Information | `road_type`, `road_surface_conditions`, `speed_limit`, `junction_control`, `junction_detail` |
+| Weather & Light Conditions | `weather_conditions`, `light_conditions`, `carriageway_hazards` |
+| Location Details | `latitude`, `longitude`, `local_authority_district`, `police_force`, `urban_or_rural_area` |
+| Time Details | `year`, `month`, `month_number`, `day_of_week`, `hour` |
+| Derived Fields | `severity_score`, `serious_fatal_flag` |
 
 ---
 
-Tools Used
+## 🛠️ Tools & Technologies Used
 
-Tool| Purpose
-Microsoft Excel| Data cleaning, helper columns, PivotTables, charts, simple statistics
-MySQL| Data storage, relational table creation, SQL querying
-Power BI| Interactive dashboard creation and business storytelling
-GitHub| Project submission and documentation
+| Tool | Purpose |
+|---|---|
+| **Microsoft Excel** | Data cleaning, PivotTables, PivotCharts, simple statistics, summary dashboard |
+| **MySQL** | Database creation, table design, data import, SQL analysis |
+| **Power BI** | Interactive dashboard creation and visual storytelling |
+| **CSV** | Cleaned data import and transfer between tools |
 
 ---
 
-Methodology
+## 🧱 SQL Schema Design
 
-1. Business Understanding
+The cleaned road accident data was divided into three structured SQL tables.
 
-The project started by identifying the main business objective: understanding road accident severity and risk factors. Business questions were prepared around accident severity, road type, weather, lighting, vehicle type, district, and speed limit.
+| Table Name | Purpose |
+|---|---|
+| `accident_fact` | Main accident-level table containing severity, casualties, vehicles, speed, and time details |
+| `accident_location` | Stores accident location details such as district, police force, latitude, longitude, and urban/rural area |
+| `accident_conditions` | Stores road, weather, light, junction, surface, hazard, and vehicle-related conditions |
 
-2. Data Cleaning in Excel
+### Relationship Key
 
-The raw dataset was reviewed for duplicate records, spelling issues, blank values, date formatting, and data quality problems.
+All tables are connected using:
 
-Important cleaning steps included:
+```sql
+accident_index
+````
 
-- Corrected accident severity spelling issue where needed.
-- Checked duplicate accident records.
-- Kept useful records even when some non-critical fields had missing values.
-- Created helper columns such as year, month, month number, hour, severity score, and serious/fatal flag.
-- Prepared the cleaned dataset for SQL and Power BI analysis.
+### Table Relationships
 
-3. SQL Database Preparation
-
-The cleaned CSV file was imported into MySQL using a staging table. The dataset was then divided into three relational tables to show proper database structure.
-
-SQL Table Structure
-
-accident_fact
-
-This is the central fact table. It stores the main accident-level details.
-
-Key columns:
-
-- accident_index
-- accident_date
-- accident_time
-- day_of_week
-- accident_severity
-- number_of_casualties
-- number_of_vehicles
-- speed_limit
-- year
-- month
-- month_number
-- hour
-- severity_score
-- serious_fatal_flag
-
-accident_location
-
-This table stores accident location-related details.
-
-Key columns:
-
-- accident_index
-- latitude
-- longitude
-- local_authority_district
-- police_force
-- urban_or_rural_area
-
-accident_conditions
-
-This table stores road, weather, light, junction, and vehicle-related details.
-
-Key columns:
-
-- accident_index
-- junction_control
-- junction_detail
-- light_conditions
-- carriageway_hazards
-- road_surface_conditions
-- road_type
-- weather_conditions
-- vehicle_type
-
-Relationship Structure
-
-The three final tables are connected using "accident_index".
-
+```sql
 accident_fact.accident_index = accident_location.accident_index
 
 accident_fact.accident_index = accident_conditions.accident_index
+```
+<img width="1011" height="498" alt="Relationship" src="https://github.com/user-attachments/assets/d3f41d90-2e6f-49db-9e1b-c8155ef99deb" />
 
-This structure allows accident severity, casualties, location, weather, road type, and vehicle type to be analyzed together using SQL JOIN queries and Power BI relationships.
+---
 
-4. SQL Analysis
+## 🔄 Methodology
 
-SQL queries were written using:
+The project was completed in the following steps:
 
-- SELECT
-- WHERE
-- JOIN
-- GROUP BY
-- COUNT
-- SUM
-- AVG
+### 1️⃣ Data Cleaning in Excel
 
-The SQL analysis answered questions such as:
+The raw accident dataset was cleaned and prepared for analysis. Missing values, inconsistent text formats, duplicate records, and incorrect data types were reviewed.
 
-- Which accidents were serious or fatal?
-- Which speed limits show higher serious/fatal accident rates?
-- Which road types have higher accident counts?
-- Which districts report the most accidents?
-- Which weather conditions are linked with serious/fatal accidents?
+Additional derived columns were created, such as:
 
-5. Power BI Dashboard Development
+* `year`
+* `month`
+* `month_number`
+* `hour`
+* `severity_score`
+* `serious_fatal_flag`
 
-Power BI was used to create an interactive dashboard with KPI cards, slicers, charts, and relationship-based visuals.
+These columns helped in trend analysis, severity analysis, and dashboard filtering.
+
+---
+
+### 2️⃣ Excel Analysis
+
+Excel was used to create:
+
+* PivotTables
+* PivotCharts
+* Summary dashboard
+* Simple statistics summary
+* Correlation analysis
+* Monthly accident trend chart
+* Outlier review
+
+The Excel analysis helped identify accident patterns by severity, road type, month, vehicle type, weather condition, and light condition.
+
+---
+
+### 3️⃣ SQL Analysis
+
+The cleaned CSV file was imported into MySQL. SQL queries were used to analyze accident severity, casualties, road types, weather conditions, speed limits, and location-based accident patterns.
+
+Examples of SQL analysis performed:
+
+* Accident count by severity
+* Casualty count by road type
+* Serious/Fatal accident rate by weather condition
+* Top districts by accidents and casualties
+* Accident patterns by year and speed limit
+
+---
+
+### 4️⃣ Power BI Dashboard
+
+Power BI was used to create an interactive dashboard with KPIs, charts, slicers, and visual storytelling.
 
 The dashboard includes:
 
-- Total Accidents
-- Total Casualties
-- Fatal Accidents
-- Serious/Fatal Accident Rate
-- Average Casualties per Accident
-- Monthly Accident Trend
-- Accident Severity Breakdown
-- Vehicle Type Analysis
-- Road Type Analysis
-- Urban vs Rural Accident Split
-- Light Condition Analysis
-- Weather and Road Surface Filters
+* Total Accidents
+* Total Casualties
+* Fatal Accidents
+* Serious/Fatal Accident Rate
+* Average Casualties per Accident
+* Monthly Accident Trend
+* Accidents by Severity
+* Accidents by Road Type
+* Urban vs Rural Accident Analysis
+* Casualties by Vehicle Type
+* Accidents by Light Conditions
 
 ---
 
-Key KPIs
+## 📊 Key Dashboard KPIs
 
-KPI| Description
-Total Accidents| Total number of unique accident records
-Total Casualties| Total number of casualties across all accidents
-Fatal Accidents| Number of accidents marked as fatal
-Serious/Fatal Accident Rate| Percentage of accidents that were serious or fatal
-Average Casualties per Accident| Average number of casualties per accident
-
-Unique KPI
-
-The unique KPI selected for this project is:
-
-Serious/Fatal Accident Rate
-
-This KPI helps measure the proportion of accidents that resulted in serious or fatal outcomes. It is useful for understanding overall road safety risk.
+| KPI                                 | Description                                        |
+| ----------------------------------- | -------------------------------------------------- |
+| **Total Accidents**                 | Total number of accident records analyzed          |
+| **Total Casualties**                | Total number of casualties recorded                |
+| **Fatal Accidents**                 | Number of accidents classified as Fatal            |
+| **Serious/Fatal Accident Rate**     | Percentage of accidents marked as Serious or Fatal |
+| **Average Casualties per Accident** | Average number of casualties per accident          |
 
 ---
 
-Preliminary Dashboard Numbers
+## 🔍 Key Findings
 
-Based on the cleaned dataset and Power BI measures:
+### 1️⃣ Accident Severity Pattern
 
-Metric| Value
-Total Accidents| Approximately 303K
-Total Casualties| Approximately 410K
-Fatal Accidents| Approximately 4K
-Average Casualties per Accident| 1.36
-Serious/Fatal Accident Rate| 14.47%
+The analysis shows that **Slight accidents form the largest share** of total accidents. However, Serious and Fatal accidents are highly important because they represent higher risk and greater impact on public safety.
 
----
+### 2️⃣ Road Type Risk
 
-Dashboard Screenshots
+Certain road types show higher accident counts and casualty levels. This indicates that road structure, traffic volume, and road usage patterns may influence accident occurrence.
 
-Add dashboard screenshots here after completing the Power BI dashboard.
+### 3️⃣ Vehicle Type Impact
 
-Example:
+Some vehicle types are linked with higher casualty counts. This helps identify which vehicle categories require more safety monitoring and awareness campaigns.
 
-![Executive Overview Dashboard](03_PowerBI/Dashboard_Screenshots/executive_overview.png)
+### 4️⃣ Monthly Accident Trend
 
-![Road and Weather Analysis](03_PowerBI/Dashboard_Screenshots/road_weather_analysis.png)
+The monthly trend analysis shows how accident frequency changes over time. This helps identify whether accidents are concentrated in specific months or remain stable throughout the year.
 
-![Location and Severity Analysis](03_PowerBI/Dashboard_Screenshots/location_severity_analysis.png)
+### 5️⃣ Light and Weather Conditions
 
----
+Accidents occur under different light and weather conditions. While accident counts may be higher in common driving conditions, poor visibility and adverse weather still require special attention from a road safety perspective.
 
-Key Insights
+### 6️⃣ Urban vs Rural Accident Pattern
 
-The following insights will be finalized after completing the Power BI dashboard:
-
-1. A large share of accidents are slight, but serious and fatal accidents still form an important risk category.
-2. Some road types and vehicle types are associated with higher casualty counts.
-3. Weather, lighting, and road surface conditions may influence accident severity.
-4. Urban and rural accident patterns may differ in terms of count and severity.
-5. Certain local authority districts may need more targeted road safety interventions.
+The dashboard compares accidents in urban and rural areas. This helps understand whether accident frequency and casualty risk differ based on location type.
 
 ---
 
-Business Recommendations
+## 📸 Dashboard Screenshots
 
-Based on the analysis, the following actions are recommended:
+### Main Power BI Dashboard
 
-1. Focus on Serious and Fatal Accident Reduction
+<img width="885" height="493" alt="Dashboard Screenshot" src="https://github.com/user-attachments/assets/e561ec08-6b1e-4ffd-8722-29caa9995a24" />
 
-Since serious and fatal accidents directly impact public safety, authorities should prioritize high-risk areas and conditions where these accidents occur more frequently.
 
-Expected Impact:
-Reduction in severe road accident outcomes and improved road safety planning.
+### Excel Summary Dashboard
 
-2. Improve Safety Measures on High-Risk Road Types
+<img width="868" height="424" alt="image" src="https://github.com/user-attachments/assets/efba6716-ef3c-4d8b-8575-861e858befe6" />
 
-Road types with higher accident or casualty counts should be reviewed for better signage, speed control, lighting, and road safety infrastructure.
-
-Expected Impact:
-Lower accident frequency and reduced casualty severity on risky road segments.
-
-3. Target Weather and Road Surface Risk Conditions
-
-If higher accident rates are observed during poor weather or wet road surface conditions, safety alerts, road maintenance, and driver awareness campaigns should be improved.
-
-Expected Impact:
-Better accident prevention during risky driving conditions.
-
-4. Monitor District-Level Accident Hotspots
-
-Districts with high accident counts should be prioritized for further investigation and road safety interventions.
-
-Expected Impact:
-More focused resource allocation and better local safety planning.
+<img width="1022" height="404" alt="image" src="https://github.com/user-attachments/assets/eb0e1bd8-73db-49de-babe-b9a9c9aa2bbf" />
 
 ---
 
-Project Folder Structure
+## 💡 Business Recommendations
 
-StudentID_Name_MilestoneProject/
+Based on the analysis, the following recommendations can be made:
+
+### ✅ 1. Focus on High-Severity Accidents
+
+Even though Slight accidents may be more frequent, Serious and Fatal accidents should receive priority because they have greater human impact.
+
+### ✅ 2. Improve Safety Measures on High-Risk Road Types
+
+Road types with higher accident and casualty counts should be reviewed for better signage, speed control, lane markings, and traffic monitoring.
+
+### ✅ 3. Monitor Vehicle Categories with Higher Casualties
+
+Vehicle types linked with higher casualty counts should be targeted through awareness campaigns, safety checks, and stricter traffic enforcement.
+
+### ✅ 4. Strengthen Road Safety During Riskier Time Periods
+
+If specific months show higher accident counts, authorities can plan seasonal safety campaigns, awareness programs, and enforcement activities during those periods.
+
+### ✅ 5. Improve Visibility and Lighting Conditions
+
+Accidents related to poor light conditions should be addressed through better street lighting, reflective signs, and visibility improvement measures.
+
+### ✅ 6. Use Data-Driven Decision Making
+
+Road safety planning should not depend on one factor alone. Accident severity, road type, vehicle type, weather, light condition, location, and time should be analyzed together for better decision-making.
+
+---
+
+## 📁 Project Folder Structure
+
+```text
+Road-Accident-Analysis-Dashboard/
 │
 ├── README.md
 │
 ├── 01_Excel/
-│   └── StudentID_Name_ExcelAnalysis.xlsx
+│   └── Excel_Analysis.xlsx
 │
 ├── 02_SQL/
-│   ├── StudentID_Name_SQLScripts.sql
+│   ├── SQL_Scripts.sql
 │   └── TableNotes.pdf
 │
 ├── 03_PowerBI/
-│   ├── StudentID_Name_PowerBI.pbix
+│   ├── PowerBI_Dashboard.pbix
 │   └── Dashboard_Screenshots/
 │
 └── 04_Final_Report/
-    ├── StudentID_Name_BusinessInsightReport.pdf
+    ├── BusinessInsightReport.pdf
     └── DataDictionary.pdf
+```
 
 ---
 
-Conclusion
+## 🧾 Final Conclusion
 
-This project demonstrates how road accident data can be transformed into meaningful business and safety insights using Excel, SQL, and Power BI. By analyzing accident severity, casualties, road conditions, weather conditions, vehicle types, and locations, the dashboard helps identify high-risk patterns and supports data-driven road safety decisions.
+The Road Accident Analysis Dashboard provides a clear and structured view of accident patterns, severity levels, casualty risk, road conditions, vehicle involvement, and time-based trends.
+
+By combining **Excel, SQL, and Power BI**, this project converts raw accident data into meaningful insights that can support road safety planning and decision-making.
+
+The analysis highlights that accident risk should be understood through multiple factors together, including severity, road type, vehicle type, weather condition, light condition, location, and time. These insights can help authorities take targeted actions to reduce accident severity and improve public safety.
+
+---
+
+<div align="center">
+
+## ⭐ Project Outcome
+
+**A complete end-to-end data analytics project using Excel, SQL, and Power BI for road accident analysis and business insight generation.**
+
+</div>
+```
