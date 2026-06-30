@@ -1,6 +1,4 @@
 
-````markdown
-<div align="center">
 
 # 🚦 Road Accident Analysis Dashboard  
 ### Excel • SQL • Power BI | Accident Severity & Road Safety Insights
